@@ -1,5 +1,8 @@
 # binance-fees
 
+```
+LTC: LQjSwZLigtgqHA3rE14yeRNbNNY2r3tXcA
+```
 A simple nodejs program to generate a report showing the smallest possible purchases.  Since Binance does not allow partial lots, there is often **dust** left in counter currencies after purchases or sales.  This will calculate the minimum lot cost on the various exchanges to give you an idea what can be bought with that dust.  It will also calculate the **exit tax** required to move the various coins off of binance.
 
 ## Getting Started
