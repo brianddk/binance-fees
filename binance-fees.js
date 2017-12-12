@@ -8,8 +8,8 @@ var bluebird = require('bluebird');
 var cheerio = require('cheerio')
 
 // Globals (parameterize later).
-var bMarkdown = true; // else CSV
-var bTruncate = true; // only list < $1
+var bMarkdown = true;; // else CSV
+var bTruncate = true;; // only list < $1
 
 function jsonReq(url, bParse) {
     return rp({
@@ -144,4 +144,9 @@ Key
                 console.log(line);
             }
         }
+    })
+    .catch(function (err) {
+        console.log(err.name);
+        console.log("  " + err.options.uri);
+        console.log("    " + err.message);
     });
