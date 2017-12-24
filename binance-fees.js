@@ -8,8 +8,8 @@ var bluebird = require('bluebird');
 var cheerio = require('cheerio')
 
 // Globals (parameterize later).
-var bMarkdown = true;; // else CSV
-var bTruncate = true;; // only list < $1
+var bMarkdown = false;; // else CSV
+var bTruncate = false;; // only list < $1
 
 function jsonReq(url, bParse) {
     return rp({
@@ -65,6 +65,12 @@ bluebird.all([binanceExch, binanceQuot, gdaxBtcQuot, gdaxEthQuot, binanceFees])
             var symbol = exch.symbols[i].symbol;
             var coin = exch.symbols[i].baseAsset;
             var counter = exch.symbols[i].quoteAsset;
+            if (!quotelist[symbol] ||
+                !usdPrice[counter] ||
+                !feelist[coin] ) {
+                //console.log(coin + "; " + counter + "; " + symbol);
+                continue;
+            }
             if(counter != "BTC" && counter != "ETH" && 
                counter != "BNB" && counter != "USDT") {continue;}
             for(var j in exch.symbols[i].filters) {
@@ -146,6 +152,10 @@ Key
         }
     })
     .catch(function (err) {
+        err.name = err.name || 'NA';
+        err.error = err.error || 'NA';
+        err.options = err.options || {};
+        err.options.uri = err.options.uri || 'NA'
         console.log(err.name);
         console.log("  " + err.options.uri);
         console.log("    " + err.message);
