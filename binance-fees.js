@@ -25,7 +25,9 @@ var binanceExch = jsonReq('https://api.binance.com/api/v1/exchangeInfo', true);
 var binanceQuot = jsonReq('https://api.binance.com/api/v3/ticker/price', true);
 var gdaxBtcQuot = jsonReq('https://api.gdax.com/products/BTC-USD/ticker', true);
 var gdaxEthQuot = jsonReq('https://api.gdax.com/products/ETH-USD/ticker', true);
-var binanceFees = jsonReq('https://support.binance.com/hc/en-us/articles/115000429332-Fee-Structure-on-Binance', false);
+//var binanceFees = jsonReq('https://support.binance.com/hc/en-us/articles/115000429332-Fee-Structure-on-Binance', false);
+// URI changed to https://www.binance.com/fees.html... have to recode... temp hack to use archive URI
+var binanceFees = jsonReq('http://web.archive.org/web/20180106214515/https://support.binance.com/hc/en-us/articles/115000429332-Fee-Structure-on-Binance', false);
 //var gdaxExch     = rp('https://api.gdax.com/products/');
 
 bluebird.all([binanceExch, binanceQuot, gdaxBtcQuot, gdaxEthQuot, binanceFees])
@@ -136,7 +138,7 @@ Key
             }
         }
         else {
-            console.log("symbol,coin,counter,minLot,price,lotUsd,feeUsd")
+            console.log("symbol,coin,counter,minLot,price,lotUsd,feeUsd-STALE")
             for(var i in sortedKeys) {
                 var symbol = sortedKeys[i].symbol;
                 var p = pricelist[symbol];
