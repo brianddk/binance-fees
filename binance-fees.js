@@ -40,6 +40,7 @@ bluebird.all([binanceExch, binanceQuot, gdaxBtcQuot, gdaxEthQuot, binanceFees])
             if (!i) return;
             var text = $(this).text();
             var lines = text.split('\n');
+            if (lines.length < 6) return;
             var coin = lines[5].trim();
             var fee = lines[4].trim();
             if (isNaN(fee)) fee = 0;
